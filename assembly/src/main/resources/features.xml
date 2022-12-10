@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<features name="karaf-webconsole-${project.version}">
+
+  <repository>mvn:org.ops4j.pax.wicket/features/${pax-wicket.version}/xml/features</repository>
+
+  <feature name="webconsole-wicket" version="${project.version}" description="Karaf Wicket Webconsole">
+    <feature>webconsole-core</feature>
+    <feature>webconsole-karaf</feature>
+    <feature>webconsole-osgi</feature>
+    <feature>webconsole-config</feature>
+    <feature>webconsole-log</feature>
+    <feature>webconsole-event</feature>
+    <feature>webconsole-blueprint</feature>
+    <feature>webconsole-scr</feature>
+  </feature>
+
+  <!-- Pax-Wicket Core Feature; loading all required features. Do a feature:install paxwicket and you're ready to go -->
+  <feature name="webconsole-core" version="${project.version}" description="Karaf WebConsole Core">
+    <details>The Webconsole core package provides the base view required for all bundles</details>
+    <feature version="${wicket.version}">wicket</feature>
+    <feature version="${pax-wicket.version}">pax-wicket</feature>
+    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.cglib/2.2.2_1</bundle>
+    <bundle>mvn:org.apache.felix/org.apache.felix.prefs/${felix-prefs.version}</bundle>
+    <bundle>mvn:org.apache.karaf.webconsole/org.apache.karaf.webconsole.core/${project.version}</bundle>
+  </feature>
+
+  <feature name="webconsole-osgi" version="${project.version}" description="Karaf WebConsole OSGi Core">
+    <details>Adds support for osgi packages to the webconsole.</details>
+    <feature>webconsole-core</feature>
+    <bundle>mvn:org.apache.karaf.webconsole.osgi/org.apache.karaf.webconsole.osgi.core/${project.version}</bundle>
+  </feature>
+
+  <feature name="webconsole-config" version="${project.version}" description="Karaf WebConsole OSGi ConfigurationAdmin">
+    <details>Adds support for osgi configuration admin.</details>
+    <feature>webconsole-osgi</feature>
+    <bundle>mvn:org.apache.felix/org.apache.felix.metatype/${felix-metatype.version}</bundle>
+    <bundle>mvn:org.apache.karaf.webconsole.osgi/org.apache.karaf.webconsole.osgi.config/${project.version}</bundle>
+  </feature>
+
+  <feature name="webconsole-log" version="${project.version}" description="Karaf WebConsole OSGi LogService">
+    <details>Adds support for osgi log service.</details>
+    <feature>webconsole-osgi</feature>
+    <bundle>mvn:org.apache.karaf.webconsole.osgi/org.apache.karaf.webconsole.osgi.log/${project.version}</bundle>
+  </feature>
+
+  <feature name="webconsole-event" version="${project.version}" description="Karaf WebConsole OSGi EventAdmin">
+    <details>Adds support for osgi event admin service.</details>
+    <feature>webconsole-osgi</feature>
+    <bundle>mvn:org.apache.karaf.webconsole.osgi/org.apache.karaf.webconsole.osgi.event/${project.version}</bundle>
+  </feature>
+
+  <feature name="webconsole-karaf" version="${project.version}" description="Karaf WebConsole Features">
+    <details>Karaf bundle will contain all the pages and java classes about content specific to Karaf like features,repositories and obr.</details>
+    <feature>webconsole-core</feature>
+    <bundle>mvn:org.apache.karaf.webconsole.karaf/org.apache.karaf.webconsole.karaf.core/${project.version}</bundle>
+    <bundle>mvn:org.apache.karaf.webconsole.karaf/org.apache.karaf.webconsole.karaf.admin/${project.version}</bundle>
+    <bundle>mvn:org.apache.karaf.webconsole.karaf/org.apache.karaf.webconsole.karaf.feature/${project.version}</bundle>
+  </feature>
+
+  <feature name="webconsole-blueprint" version="${project.version}" description="Karaf WebConsole Blueprint">
+    <details>Adds support for blueprint specific features to the webconsole.</details>
+    <feature>webconsole-osgi</feature>
+    <bundle>mvn:org.apache.karaf.webconsole.osgi/org.apache.karaf.webconsole.osgi.blueprint/${project.version}</bundle>
+  </feature>
+
+  <feature name="webconsole-scr" version="${project.version}" description="Karaf WebConsole Felix SCR plugin">
+    <details>Adds support for osgi Service Components. This feature also install felix scr runtime.</details>
+    <feature>webconsole-osgi</feature>
+    <bundle>mvn:org.apache.felix/org.apache.felix.scr/${felix-scr.version}</bundle>
+    <bundle>mvn:org.apache.karaf.webconsole.osgi/org.apache.karaf.webconsole.osgi.scr/${project.version}</bundle>
+  </feature>
+
+</features>
+

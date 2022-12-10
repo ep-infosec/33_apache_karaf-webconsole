@@ -1,0 +1,25 @@
+Apache Karaf Wicket WebConsole
+===============================
+
+The base idea of this project is to take the current felix webconsole (we use in Karaf), base it
+on wicket and handle the entire thing on pax-wicket. Based on this method it should
+be very simple to provide an VERY configurable and extendable webconsole which should
+be much easier to write than the current one based on plain jscript and servlets.
+
+This version uses the current snapshot of the OPS4J Pax Wicket Project. Although snapshots
+are available via Sonatype please make sure that you've the latest build of Pax Wicket master
+in your local .m2 repositories:
+
+Instructions to build and deploy the project
+
+1) Download the code from : http://svn.apache.org/repos/asf/karaf/webconsole/trunk webconsole
+2) Build it : mvn clean install -Dtest=false
+3) Download Karaf from here : https://repository.apache.org/content/repositories/releases/org/apache/karaf/apache-karaf/2.2.2/
+4) Unzip/untar it and open a DOS/Unix shell
+5) Go to bin directory and start Karaf bin/karaf.bat or bin/.karaf
+6) Execute the following instructions :
+
+features:addurl mvn:org.apache.karaf.webconsole/apache-karaf-webconsole/0.3.0-SNAPSHOT/xml/features
+features:install webconsole-wicket
+
+7) Open cns website in your browser : http://localhost:8181/console/
